@@ -1,0 +1,17 @@
+apiVersion: v2
+name: rag-cost-optimized
+description: A Helm chart for cost-optimized RAG system with Vector DB
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - rag
+  - vector-database
+  - ai
+  - machine-learning
+  - cost-optimization
+maintainers:
+  - name: RAG Team
+home: https://github.com/imrohankataria/rag-cost-optimized-vdb-helm
+sources:
+  - https://github.com/imrohankataria/rag-cost-optimized-vdb-helm
