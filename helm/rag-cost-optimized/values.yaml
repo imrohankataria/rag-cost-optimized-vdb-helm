@@ -1,0 +1,102 @@
+# Default values for rag-cost-optimized
+replicaCount: 1
+
+image:
+  repository: rag-cost-optimized
+  pullPolicy: IfNotPresent
+  tag: "1.0.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: rag-system.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# OpenAI Configuration
+openai:
+  apiKey: ""
+  embeddingModel: "text-embedding-ada-002"
+  llmModel: "gpt-3.5-turbo"
+
+# Redis Configuration
+redis:
+  enabled: true
+  host: "redis-master"
+  port: 6379
+  password: ""
+
+# Cache Configuration
+cache:
+  enabled: true
+  ttl: 3600
+
+# Vector Store Configuration
+vectorStore:
+  collectionName: "rag_documents"
+  chunkSize: 500
+  chunkOverlap: 50
+  topK: 5
+
+# Persistence
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+  mountPath: /data
+
+# Environment variables
+env:
+  LOG_LEVEL: INFO
+  TRACK_COSTS: "true"
