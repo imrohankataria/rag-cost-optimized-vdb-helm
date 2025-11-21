@@ -4,7 +4,7 @@ Core RAG system implementation with cost tracking and caching.
 
 import logging
 import os
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 from openai import OpenAI
 
 from .cost_tracker import CostTracker, get_global_tracker
@@ -196,7 +196,7 @@ class RAGSystem:
         logger.info(f"Query completed. Cost: ${result['cost']:.4f}, Cached: {cached}")
         return result
     
-    def _generate_answer(self, query: str, documents: List[str]) -> tuple[str, float]:
+    def _generate_answer(self, query: str, documents: List[str]) -> Tuple[str, float]:
         """
         Generate answer using LLM.
         

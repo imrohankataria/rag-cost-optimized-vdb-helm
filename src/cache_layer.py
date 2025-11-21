@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 class CacheLayer:
     """Redis-based caching layer for RAG operations."""
     
+    # Socket timeout for Redis connections (seconds)
+    SOCKET_TIMEOUT = 5
+    
     def __init__(self, 
                  host: str = None,
                  port: int = None,
@@ -48,7 +51,7 @@ class CacheLayer:
                 host=host,
                 port=port,
                 decode_responses=True,
-                socket_connect_timeout=5
+                socket_connect_timeout=self.SOCKET_TIMEOUT
             )
             # Test connection
             self.client.ping()

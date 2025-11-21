@@ -86,6 +86,7 @@ class CostTracker:
     def track_vector_search(self, cached: bool = False) -> float:
         """Track cost of vector database search."""
         # Vector search has compute cost
+        # Using pricing constants for consistency
         cost = 0.0001 if cached else 0.001
         
         operation = {
